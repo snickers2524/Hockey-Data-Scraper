@@ -1,0 +1,12 @@
+use hockey_data;
+
+create table if not exists drafts (
+    year year not null ,
+    round char(1) not null,
+    pick_overall int not null ,
+    pick_in_round int not null ,
+    team_id int not null ,
+    prospect_id int,
+    prospect_fullname varchar(255) not null,
+    prospect_link varchar(255) not null
+)
