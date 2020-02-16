@@ -24,7 +24,7 @@ class Teams:
         self.active = active
 
     def query_insert(self,connection):
-        query = f"insert into teams (id,name,link,venue_name,venue_link,venue_city,venue_timezone,abbreviation,team_name,locationName,firstYearOfPlay,division_id," \
+        query = f"insert into teams (team_id,name,link,venue_name,venue_link,venue_city,venue_timezone,abbreviation,team_name,locationName,firstYearOfPlay,division_id," \
                 f"conference_id,franchise_teamName,franchise_link,shortName,officialSiteUrl,franchiseId,active) values ({self.id},'{self.name}','{self.link}','{self.venue_name}'," \
                 f"'{self.venue_link}','{self.venue_city}','{self.venue_timezone}','{self.abbreviation}','{self.team_name}','{self.locationName}','{self.firstYearOfPlay}'," \
                 f"{self.division_id}," \

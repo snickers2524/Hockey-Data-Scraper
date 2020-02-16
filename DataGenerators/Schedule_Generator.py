@@ -1,7 +1,6 @@
 import requests
 from MySQLCode import DataBaseConnection
 from DataGeneratorClasses import Schedule_Generator_Class as sch
-import pprint as p
 
 connection = DataBaseConnection.mysqlopen()
 
