@@ -28,7 +28,7 @@ def single_game_box_score(team, connection, url_data):
                                               esSavePercentage=stats["evenStrengthSavePercentage"])
             else:
                 stats = url_data[team]["players"][player]["stats"]["skaterStats"]
-                ply = bsg.BoxScore_Player(game_id=game, player_id=person["id"], team_id=url_data[team]["team"]["id"], TOI=stats["timeOnIce"], assists=stats["assists"],
+                ply = bsg.BoxScore_Player(game_id=game[0], player_id=person["id"], team_id=url_data[team]["team"]["id"], TOI=stats["timeOnIce"], assists=stats["assists"],
                                           hits=stats["hits"], goals=stats["goals"], shots=stats["shots"], PPG=stats["powerPlayGoals"], PPA=stats["powerPlayAssists"],
                                           faceOffWins=stats["faceOffWins"], faceOffTaken=stats["faceoffTaken"], takeaways=stats["takeaways"], giveaways=stats["giveaways"],
                                           SHG=stats["shortHandedGoals"], SHA=stats["shortHandedAssists"], blocked=stats["blocked"], pluMinus=stats["plusMinus"],
@@ -40,7 +40,7 @@ def single_game_box_score(team, connection, url_data):
 connection = DataBaseConnection.mysqlopen()
 
 cursor = connection.cursor()
-cursor.execute('select game_id from schedule where game_date<"2020-02-15";')
+cursor.execute('select game_id from schedule where game_date<"2020-02-15" and season_id>=20152016;')
 all_games = cursor.fetchall()
 
 for game in all_games:

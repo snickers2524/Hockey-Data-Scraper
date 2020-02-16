@@ -27,7 +27,6 @@ class BoxScore_Player:
         query = f"insert into boxscore_player values ({self.game_id},{self.player_id},{self.team_id},\"{self.TOI}\",{self.assists},{self.hits},{self.goals},{self.shots}," \
                 f"{self.PPG},{self.PPA},{self.faceOffWins},{self.faceOffTaken},{self.takeaways},{self.giveaways},{self.SHG},{self.SHA},{self.blocked},{self.plusMinus}," \
                 f"\"{self.evenTOI}\",\"{self.ppTOI}\",\"{self.shTOI}\")"
-
         print(query)
         cursor = connection.cursor()
         cursor.execute(query)
@@ -51,5 +50,15 @@ class BoxScore_Goalie:
         self.evenSaves = evenSaves
         self.savePercentage = savePercentage
         self.ppSavePercentage = ppSavePercentage
-        self.sgSavePercentage = shSavePercentage
+        self.shSavePercentage = shSavePercentage
         self.esSavePercentage = esSavePercentage
+
+    def query(self,connection):
+        query = f"insert into boxscore_player values ({self.game_id},{self.player_id},{self.team_id},\"{self.TOI}\",{self.assists},{self.goals},{self.shots}," \
+                f"{self.saves},{self.ppSaves},{self.ppSaves},{self.shSaves},{self.evenSaves},{self.savePercentage},{self.ppSavePercentage},{self.shSavePercentage}," \
+                f"{self.esSavePercentage}"
+        print(query)
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+
