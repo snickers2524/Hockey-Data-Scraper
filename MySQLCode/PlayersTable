@@ -1,0 +1,24 @@
+use hockey_data;
+
+drop table if exists players;
+
+create table if not exists players (
+    player_id int not null primary key unique ,
+    link varchar(255) not null,
+    first_name varchar(255) not null,
+    last_name varchar(255) not null,
+    number int,
+    birth_date date not null ,
+    birth_city varchar(255),
+    birth_state varchar(255),
+    birth_country varchar(255),
+    height double,
+    weight int,
+    alternate_captain bool,
+    captain bool,
+    rookie bool,
+    shoots_catches char,
+    roster_status char,
+    current_team int,
+    position char
+)

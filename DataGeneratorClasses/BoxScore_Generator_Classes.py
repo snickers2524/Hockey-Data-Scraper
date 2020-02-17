@@ -1,6 +1,6 @@
 class BoxScore_Player:
-    def __init__(self, game_id, player_id, team_id, TOI="00:00:00", assists=0, hits=0, goals=0, shots=0, PPG=0, PPA=0, faceOffWins=0, faceOffTaken=0, takeaways=0, giveaways=0,
-                 SHG=0, SHA=0, blocked=0, pluMinus=0, evenTOI="00:00:00", ppTOI="00:00:00", shTOI="00:00:00"):
+    def __init__(self, game_id, player_id, team_id, TOI="NULL", assists="NULL", hits="NULL", goals="NULL", shots="NULL", PPG="NULL", PPA="NULL", faceOffWins="NULL",
+                 faceOffTaken="NULL", takeaways="NULL", giveaways="NULL", SHG="NULL", SHA="NULL", blocked="NULL", pluMinus="NULL", evenTOI="NULL", ppTOI="NULL", shTOI="NULL"):
         self.game_id = game_id
         self.player_id = player_id
         self.team_id = team_id
@@ -24,9 +24,12 @@ class BoxScore_Player:
         self.shTOI = shTOI
 
     def query(self, connection):
+        self.evenTOI = f"\"{self.evenTOI}\"" if self.evenTOI != 'NULL' else self.evenTOI
+        self.ppTOI = f"\"{self.ppTOI}\"" if self.ppTOI != 'NULL' else self.ppTOI
+        self.shTOI = f"\"{self.shTOI}\"" if self.shTOI != 'NULL' else self.shTOI
         query = f"insert into boxscore_player values ({self.game_id},{self.player_id},{self.team_id},\"{self.TOI}\",{self.assists},{self.hits},{self.goals},{self.shots}," \
                 f"{self.PPG},{self.PPA},{self.faceOffWins},{self.faceOffTaken},{self.takeaways},{self.giveaways},{self.SHG},{self.SHA},{self.blocked},{self.plusMinus}," \
-                f"\"{self.evenTOI}\",\"{self.ppTOI}\",\"{self.shTOI}\")"
+                f"{self.evenTOI},{self.ppTOI},{self.shTOI})"
         print(query)
         cursor = connection.cursor()
         cursor.execute(query)
@@ -34,14 +37,14 @@ class BoxScore_Player:
 
 
 class BoxScore_Goalie:
-    def __init__(self,game_id, player_id, team_id, TOI="00:00:00", assists=0, hits=0, goals=0, shots=0,saves=0,ppSaves=0,shSaves=0,evenSaves=0,
-                 savePercentage=0,ppSavePercentage=0,shSavePercentage=0,esSavePercentage=0):
+    def __init__(self, game_id, player_id, team_id, TOI="NULL", assists="NULL", goals="NULL", shots="NULL", saves="NULL", ppSaves="NULL", shSaves="NULL", evenSaves="NULL",
+                 savePercentage="NULL", ppSavePercentage="NULL", shSavePercentage="NULL", esSavePercentage="NULL", shShotsAgainst = "NULL", esShotsAgainst = "NULL",
+                 ppShotsAgainst = "NULL"):
         self.game_id = game_id
         self.player_id = player_id
         self.team_id = team_id
         self.TOI = TOI
         self.assists = assists
-        self.hits = hits
         self.goals = goals
         self.shots = shots
         self.saves = saves
@@ -52,13 +55,15 @@ class BoxScore_Goalie:
         self.ppSavePercentage = ppSavePercentage
         self.shSavePercentage = shSavePercentage
         self.esSavePercentage = esSavePercentage
+        self.shShotsAgainst = shShotsAgainst
+        self.esShotsAgainst = esShotsAgainst
+        self.ppShotsAgainst = ppShotsAgainst
 
-    def query(self,connection):
-        query = f"insert into boxscore_player values ({self.game_id},{self.player_id},{self.team_id},\"{self.TOI}\",{self.assists},{self.goals},{self.shots}," \
-                f"{self.saves},{self.ppSaves},{self.ppSaves},{self.shSaves},{self.evenSaves},{self.savePercentage},{self.ppSavePercentage},{self.shSavePercentage}," \
-                f"{self.esSavePercentage}"
-        print(query)
+    def query(self, connection):
+        self.TOI = f"\"{self.TOI}\"" if self.TOI != 'NULL' else self.TOI
+        query = f"insert into boxscore_goalie values ({self.game_id},{self.player_id},{self.team_id},{self.TOI},{self.assists},{self.goals},{self.shots}," \
+                f"{self.saves},{self.ppSaves},{self.shSaves},{self.evenSaves},{self.savePercentage},{self.ppSavePercentage},{self.shSavePercentage}," \
+                f"{self.esSavePercentage}, {self.shShotsAgainst}, {self.esShotsAgainst}, {self.ppShotsAgainst})"
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()
-

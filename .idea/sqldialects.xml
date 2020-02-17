@@ -3,12 +3,14 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/DataGeneratorClasses/BoxScore_Generator_Classes.py" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/DataGeneratorClasses/Drafts_Generator_Class.py" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/DataGeneratorClasses/Players_Generator_Class.py" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/DataGeneratorClasses/Schedule_Generator_Class.py" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/DataGeneratorClasses/Seasons_Generator_Class.py" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/DataGenerators/BoxScore_Generator_Player.py" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/DataGenerators/BoxScore_Generator.py" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/BoxScoreTable_Goalie" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/BoxScoreTable_Player" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/DraftsTable" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/MySQLCode/PlayersTable" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/SchedulesTable" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/SeasonsTable" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/MySQLCode/TeamsTable" dialect="MySQL" />
