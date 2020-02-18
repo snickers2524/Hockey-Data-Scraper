@@ -4,9 +4,9 @@ import mysql.connector
 def mysqlopen():
     connection = mysql.connector.connect(
         host='localhost',
-        user='root',
+        user='aidan',
         password='Watermelon@3489',
-        database='Hockey_Data'
+        database='hockey_data'
     )
     return connection
 
