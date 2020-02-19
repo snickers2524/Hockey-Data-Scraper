@@ -1,30 +1,7 @@
 import requests
-import math
 from MySQLCode import DataBaseConnection
 from DataGeneratorClasses import BoxScore_Generator_Classes as bsg
-
-
-def time_change(mm_ss):
-    if len(mm_ss) == 5:
-        if math.floor(int(mm_ss[0:2]) / 60) >=1 & math.floor(int(mm_ss[0:2]) / 60) < 10:
-            if int(mm_ss[0:2]) % 60>=10:
-                hh_mm_ss = f"{'0' + str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-            else:
-                hh_mm_ss = f"{'0' + str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + '0' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-        elif math.floor(int(mm_ss[0:2]) / 60) >=10:
-            if int(mm_ss[0:2]) % 60>=10:
-                hh_mm_ss = f"{str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-            else:
-                hh_mm_ss = f"{str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + '0' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-        else:
-            if int(mm_ss[0:2]) % 60 >= 10:
-                hh_mm_ss = f"{'00' + str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-            else:
-                hh_mm_ss = f"{'00' + str(math.floor(int(mm_ss[0:2]) / 60)) + ':' + '0' + str(int(mm_ss[0:2]) % 60) + ':' + mm_ss[3:5]}"
-        return  hh_mm_ss
-    else:
-        return mm_ss
-
+from HelperFunctions import TImeChange as tc
 
 def single_game_box_score(connection, url_data, game):
     for player in url_data["players"]:
@@ -34,7 +11,7 @@ def single_game_box_score(connection, url_data, game):
             stats = stats["goalieStats"]
             ply_object = bsg.BoxScore_Goalie(game_id=game, player_id=ply["id"], team_id=url_data["team"]["id"])
             if "timeOnIce" in stats.keys():
-                setattr(ply_object, "TOI", time_change(stats["timeOnIce"]))
+                setattr(ply_object, "TOI", tc.time_change(stats["timeOnIce"]))
             if "assists" in stats.keys():
                 setattr(ply_object, "assists", stats["assists"])
             if "goals" in stats.keys():

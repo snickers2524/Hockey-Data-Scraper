@@ -1,0 +1,25 @@
+use hockey_data;
+
+drop table if exists live_data;
+
+create table live_data (
+    game_event_id double primary key ,
+    game_id int not null ,
+    dateTime datetime not null ,
+    event_id int not null,
+    goals_away int not null,
+    goals_home int not null ,
+    period_ int not null,
+    period_time time not null ,
+    period_time_remaining time not null,
+    period_type varchar(255) not null,
+    x_coord double,
+    y_coord double,
+    player1_id int,
+    player1_type varchar(255),
+    player2_id int,
+    player2_type varchar(255),
+    event_description varchar(255),
+    event_type varchar(255),
+    foreign key (game_id) references schedule(game_id)
+)
