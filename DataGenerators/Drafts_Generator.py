@@ -18,7 +18,7 @@ for yr in years:
             if pick['prospect']['fullName'] == "":  # Player Does Not Exists ************************
                 continue
             elif (pick['prospect']['fullName'] != "") & ("id" not in pick['prospect']):  # Player exists but does not have a prospect ID *********************************
-                dft.Drafts(year=pick['year'], round=pick['round'], pick_overall=pick['pickOverall'], pick_in_round=pick['pickInRound'], team_id=pick['team']['id'],
+                d = dft.Drafts(year=pick['year'], round=pick['round'], pick_overall=pick['pickOverall'], pick_in_round=pick['pickInRound'], team_id=pick['team']['id'],
                            prospect_fullname=pick['prospect']['fullName'], prospect_link=pick['prospect']['link'])
             else:
                 d = dft.Drafts(year=pick['year'], round=pick['round'], pick_overall=pick['pickOverall'], pick_in_round=pick['pickInRound'], team_id=pick['team']['id'],

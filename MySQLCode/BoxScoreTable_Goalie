@@ -20,7 +20,5 @@ create table if not exists boxscore_goalie (
     esSavePercentage double,
     shShotsAgainst int,
     esShotsAgainst int,
-    ppShotsAgainst int,
-    foreign key (game_id) references schedule (game_id),
-    foreign key (team_id) references teams(team_id)
+    ppShotsAgainst int
 )

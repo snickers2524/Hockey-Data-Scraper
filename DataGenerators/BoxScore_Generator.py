@@ -3,11 +3,13 @@ from MySQLCode import DataBaseConnection
 from DataGeneratorClasses import BoxScore_Generator_Classes as bsg
 from HelperFunctions import TImeChange as tc
 
+
 def single_game_box_score(connection, url_data, game):
     for player in url_data["players"]:
         ply = url_data["players"][player]["person"]
         stats = url_data["players"][player]["stats"]
-        if (ply["primaryPosition"]["code"] == "G") & (stats != {}):
+
+        if (url_data["players"][player]["position"]["code"] == "G") & (stats != {}):
             stats = stats["goalieStats"]
             ply_object = bsg.BoxScore_Goalie(game_id=game, player_id=ply["id"], team_id=url_data["team"]["id"])
             if "timeOnIce" in stats.keys():
@@ -41,7 +43,7 @@ def single_game_box_score(connection, url_data, game):
             ply_object.query(connection)
             del ply_object
 
-        elif (ply["primaryPosition"]["code"] != "G") & (stats != {}):
+        elif (url_data["players"][player]["position"]["code"] != "G") & (stats != {}):
             stats = stats["skaterStats"]
             ply_object = bsg.BoxScore_Player(game_id=game, player_id=ply["id"], team_id=url_data["team"]["id"])
             if "timeOnIce" in stats.keys():
@@ -87,7 +89,7 @@ def single_game_box_score(connection, url_data, game):
 connection = DataBaseConnection.mysqlopen()
 
 cursor = connection.cursor()
-cursor.execute('select game_id from schedule where game_date<"2020-02-15" and season_id>=20152016;')
+cursor.execute('select game_id from schedule where game_date<"2020-02-19" and (game_type="P" or game_type="R") and game_id>=2013020080;')
 all_games = cursor.fetchall()
 
 for game in all_games:

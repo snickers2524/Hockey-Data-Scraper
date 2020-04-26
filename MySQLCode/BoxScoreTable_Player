@@ -24,7 +24,5 @@ create table if not exists boxscore_player
     plusMinus    int,
     evenTOI      time,
     ppTOI        time,
-    shTOI        time,
-    foreign key (game_id) references schedule (game_id),
-    foreign key (team_id) references teams (team_id)
+    shTOI        time
 )

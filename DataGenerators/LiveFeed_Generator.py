@@ -9,9 +9,8 @@ years = list(range(2000, 2020))
 connection = DataBaseConnection.mysqlopen()
 
 cursor = connection.cursor()
-cursor.execute("select live_link, game_id from schedule where game_date < '2020-02-16';")
+cursor.execute("select live_link, game_id from schedule where game_date < '2020-03-12' and game_id!=2018021252 and game_id>2018021252 ;")
 links = cursor.fetchall()
-print(links)
 
 for link in links:
     url = requests.get(f"https://statsapi.web.nhl.com{link[0]}")

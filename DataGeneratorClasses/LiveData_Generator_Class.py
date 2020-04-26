@@ -30,7 +30,6 @@ class Live_Data:
                 f"\"{self.period_time}\", \"{self.period_time_remaining}\", \"{self.period_type}\", {self.x_coord}, {self.y_coord}, {self.player1_id}, {self.player1_type}," \
                 f"{self.player2_id}, {self.player2_type}, {self.event_description}, {self.event_type})"
 
-        print(query)
         cursor = connection.cursor()
         cursor.execute(query)
         connection.commit()

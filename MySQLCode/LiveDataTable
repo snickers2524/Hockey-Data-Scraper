@@ -1,6 +1,6 @@
 use hockey_data;
 
-drop table if exists live_data;
+# drop table if exists live_data;
 
 create table live_data (
     game_event_id double primary key ,
